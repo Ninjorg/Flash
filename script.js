@@ -369,7 +369,7 @@ let currentCardIndex = 0;
 
 function showNextFlashcard() {
 
-    currentCardIndex = Math.floor(Math.random() * vocabulary.length); // Loop back to the first card
+    currentCardIndex = Math.floor(Math.random() * vocabulary.length);
     
     const currentCard = vocabulary[currentCardIndex];
     wordElement.textContent = currentCard.word;
@@ -378,10 +378,29 @@ function showNextFlashcard() {
     currentCardIndex++;
 }
 
-// Show the first flashcard initially
+(async () => {
+    const { default: open } = await import('open');
+
+    const vocabulary = [
+        { word: "Abate", definition: "to reduce in amount, degree, or severity" },
+        // ... (other vocabulary entries)
+    ];
+
+    const currentCard = "Abate";  // Example currentCard value
+
+    // Simulate the button click event
+    function onWrongButtonClick() {
+        const url = `https://www.dictionary.com/browse/${currentCard}`;
+        open(url);
+    }
+
+    // Call this function to simulate a button click
+    
+})();
+
+
 showNextFlashcard();
 
-// Add a click event listener to the flashcard to show the next card when clicked
 flashcard.addEventListener('click', showNextFlashcard);
 
 document.getElementById("refreshButton").addEventListener("click", function() {
@@ -393,10 +412,11 @@ document.getElementById("refreshButton").addEventListener("click", function() {
 //     flashcard.classList.toggle("flipped");
 // });
 
-// Selecting the refresh button and flashcard
-const refreshButton = document.getElementById("refreshButton");
 
-// Function to handle showing definition
+const refreshButton = document.getElementById("refreshButton");
+const wrongButton = document.getElementById("wrongButton");
+
+
 let showDefinitionTimeout;
 
 function showDefinition(word) {
@@ -405,16 +425,20 @@ function showDefinition(word) {
     flashcard.classList.add("flipped");
 }
 
-// Function to handle keydown events
+
 function handleKeydown(event) {
-    // If right arrow key is pressed, trigger refresh button click
+
     if (event.code === "ArrowRight") {
         refreshButton.click();
+    }
+    if (event.code === "ArrowLeft") {
+        wrongButton.click();
+        onWrongButtonClick();
     }
 }
 
 
-// Adding event listeners for keydown and keyup events
+
 document.addEventListener("keydown", handleKeydown);
 document.addEventListener("keyup", handleKeyup);
 
