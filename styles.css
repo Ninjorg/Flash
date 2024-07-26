@@ -41,6 +41,7 @@ h2 {
     align-items: center;
     justify-content: center;
     text-align: center;
+    padding: 40px;
 }
 
 .front, .back {
@@ -73,7 +74,8 @@ h2 {
 .button-container {
     display: flex;
     gap: 20px; /* Space between buttons */
-    margin-top: 20px; /* Adjust if needed */
+    margin-top: 15px; /* Adjust if needed */
+    margin-bottom: 15px;
 }
 
 button {
@@ -120,4 +122,11 @@ button:hover {
 .header img {
     width: 400px;
     height: 150px;
+}
+
+#refreshButton {
+    background-color: #08ff94; /* Green background */
+}
+#wrongButton {
+    background-color: #f85e5e; /* Green background */
 }
